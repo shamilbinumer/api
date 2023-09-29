@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+    body{
+        background-color: rgb(255, 227, 171);
+        color: white;
+        font-family: 'Raleway', sans-serif;
+    }
+    .main-card{
+        height: auto;
+        /* text-align: center; */
+        margin: auto;
+        background-color: rgba(0, 0, 0, 0.547);
+        width: 30%;
+        /* border: 2px solid rgba(0, 0, 0, 0.348); */
+        margin-top: 90px;
+        border-radius: 7px;
+        padding: 10px;
+        padding-bottom: 20px !important;
+    }
+    .image img{
+        width: 100%;
+        border-radius: 8px;
+    }
+    .price{
+        display: flex;
+        justify-content: space-around;
+    }
+    h2{
+        margin-top: 10px;
+    }
+    .btns{
+        margin-top: 32px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+    .btns a{
+        text-decoration: none;
+        color: rgb(0, 0, 0);
+        background-color: rgba(255, 217, 0, 0.862);
+        padding: 10px 20px;
+        /* border-radius: 6px; */
+        font-weight: 600;
+    }
+    .des{
+        margin-bottom: 15px;
+    }
+    .addcart{
+        background-color: red !important;
+        color: white !important;
+    }
+</style>
+<body>
+    <div id="main">
+        <!-- <div class="main-card">
+            <div class="image">
+                <img src="./365642.jpg" alt="">
+            </div>
+            <h1>Apple</h1>
+            <h2>Iphone x</h2>
+            <div>description</div>
+            <div class="price">
+                <div class="ogprice"><div>Price</div><div>$price</div></div>
+                <div class="dis-per"><div>discount</div><div>$pers</div></div>
+            </div>
+            <div class="btns">
+                <a href="" class="buynow">Buy Now</a>
+                <a href="" class="addcart">Add to Cart</a>
+            </div>
+        </div> -->
+    </div>
+
+    <script>
+       const url=window.location.href;
+       const search=new URLSearchParams(url.split("?")[1]);
+
+       const id=search.get("id")
+       console.log(id);
+
+    fetch(`https://dummyjson.com/products/${id}`).then((res)=>res.json()).then((data)=>{
+        console.log(data);
+        s=""
+        s+=`<div class="main-card">
+            <div class="image">
+                <img src="${data.thumbnail}" alt="">
+            </div>
+            <h2>${data.title}</h2>
+            <h3>${data.brand}</h3>
+            <div class="des">${data.description}</div>
+            <div class="price">
+                <div class="ogprice"><div>Price</div><div>$${data.price}</div></div>
+                <div class="dis-per"><div>discount</div><div>${data.discountPercentage}%</div></div>
+            </div>
+            <div class="btns">
+               <div> <a href="" class="buynow">Buy Now</a></div>
+                <div><a href="" class="addcart">Add to Cart</a></div>
+            </div>
+        </div>`
+        document.getElementById("main").innerHTML=s
+    })
+    </script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+</html>
